@@ -6,4 +6,5 @@ echo "node_modules/
 .azure/
 *.pem
 *.key
-*.cert" >> .gitignore
+*.cert" >> .gitignorenode_modules/
+node_modules/
