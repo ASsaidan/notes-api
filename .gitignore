@@ -1,0 +1,9 @@
+echo "node_modules/
+.env
+.env.*
+**/config/secrets.*
+.aws/
+.azure/
+*.pem
+*.key
+*.cert" >> .gitignore
