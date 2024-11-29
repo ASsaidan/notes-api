@@ -1,0 +1,251 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2023-11-29T14:25:06.973Z",
+    "__export_source": "insomnia.desktop.app:v2023.5.8",
+    "resources": [
+      {
+        "_id": "req_42055ca80cc54bce857a6f161a5b3a4d",
+        "parentId": "wrk_4f06ba42c5434e10a5891d8e9489c58c",
+        "modified": 1701262707024,
+        "created": 1701262707024,
+        "url": "{{ _.baseUrl }}/api/user/signup",
+        "name": "Sign Up",
+        "description": "",
+        "method": "POST",
+        "body": {
+          "mimeType": "application/json",
+          "text": "{\n\t\"email\": \"test@example.com\",\n\t\"password\": \"password123\"\n}"
+        },
+        "parameters": [],
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "authentication": {},
+        "metaSortKey": -1701262707024,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "wrk_4f06ba42c5434e10a5891d8e9489c58c",
+        "parentId": null,
+        "modified": 1701262696612,
+        "created": 1701262696612,
+        "name": "Notes API",
+        "description": "",
+        "scope": "collection",
+        "_type": "workspace"
+      },
+      {
+        "_id": "req_6a9d76648fc14573a42108f9845aa51e",
+        "parentId": "wrk_4f06ba42c5434e10a5891d8e9489c58c",
+        "modified": 1701262744745,
+        "created": 1701262744745,
+        "url": "{{ _.baseUrl }}/api/user/login",
+        "name": "Login",
+        "description": "",
+        "method": "POST",
+        "body": {
+          "mimeType": "application/json",
+          "text": "{\n\t\"email\": \"test@example.com\",\n\t\"password\": \"password123\"\n}"
+        },
+        "parameters": [],
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "authentication": {},
+        "metaSortKey": -1701262744745,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "req_createNote",
+        "parentId": "wrk_4f06ba42c5434e10a5891d8e9489c58c",
+        "modified": 1701262777878,
+        "created": 1701262777878,
+        "url": "{{ _.baseUrl }}/api/notes",
+        "name": "Create Note",
+        "description": "",
+        "method": "POST",
+        "body": {
+          "mimeType": "application/json",
+          "text": "{\n\t\"title\": \"Test Note\",\n\t\"text\": \"This is a test note content\"\n}"
+        },
+        "parameters": [],
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "Authorization",
+            "value": "Bearer {{ _.token }}"
+          }
+        ],
+        "authentication": {},
+        "metaSortKey": -1701262777878,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "req_getNotes",
+        "parentId": "wrk_4f06ba42c5434e10a5891d8e9489c58c",
+        "modified": 1701262803012,
+        "created": 1701262803012,
+        "url": "{{ _.baseUrl }}/api/notes",
+        "name": "Get Notes",
+        "description": "",
+        "method": "GET",
+        "body": {},
+        "parameters": [],
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer {{ _.token }}"
+          }
+        ],
+        "authentication": {},
+        "metaSortKey": -1701262803012,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "req_updateNote",
+        "parentId": "wrk_4f06ba42c5434e10a5891d8e9489c58c",
+        "modified": 1701262831549,
+        "created": 1701262831549,
+        "url": "{{ _.baseUrl }}/api/notes/{{ _.noteId }}",
+        "name": "Update Note",
+        "description": "",
+        "method": "PUT",
+        "body": {
+          "mimeType": "application/json",
+          "text": "{\n\t\"title\": \"Updated Note\",\n\t\"text\": \"This note has been updated\"\n}"
+        },
+        "parameters": [],
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "name": "Authorization",
+            "value": "Bearer {{ _.token }}"
+          }
+        ],
+        "authentication": {},
+        "metaSortKey": -1701262831549,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "req_deleteNote",
+        "parentId": "wrk_4f06ba42c5434e10a5891d8e9489c58c",
+        "modified": 1701262855572,
+        "created": 1701262855572,
+        "url": "{{ _.baseUrl }}/api/notes/{{ _.noteId }}",
+        "name": "Delete Note",
+        "description": "",
+        "method": "DELETE",
+        "body": {},
+        "parameters": [],
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer {{ _.token }}"
+          }
+        ],
+        "authentication": {},
+        "metaSortKey": -1701262855572,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "req_restoreNote",
+        "parentId": "wrk_4f06ba42c5434e10a5891d8e9489c58c",
+        "modified": 1701262879095,
+        "created": 1701262879095,
+        "url": "{{ _.baseUrl }}/api/notes/restore/{{ _.noteId }}",
+        "name": "Restore Note",
+        "description": "",
+        "method": "POST",
+        "body": {},
+        "parameters": [],
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer {{ _.token }}"
+          }
+        ],
+        "authentication": {},
+        "metaSortKey": -1701262879095,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "env_9063597caf1ed8860f37d568f58e952af4648793",
+        "parentId": "wrk_4f06ba42c5434e10a5891d8e9489c58c",
+        "modified": 1701262696615,
+        "created": 1701262696615,
+        "name": "Base Environment",
+        "data": {
+          "baseUrl": "http://localhost:3000",
+          "token": "",
+          "noteId": ""
+        },
+        "dataPropertyOrder": null,
+        "color": null,
+        "isPrivate": false,
+        "metaSortKey": 1701262696615,
+        "_type": "environment"
+      }
+    ]
+  }

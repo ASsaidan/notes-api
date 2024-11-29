@@ -1,132 +1,122 @@
 service: notes-api
-
 provider:
-  name: aws
-  runtime: nodejs18.x
-  stage: dev
-  region: eu-north-1
-  environment:
-    NOTES_TABLE: ${self:service}-notes-${self:provider.stage}
-    USERS_TABLE: ${self:service}-users-${self:provider.stage}
-    DELETED_NOTES_TABLE: ${self:service}-deleted-notes-${self:provider.stage}
-    JWT_SECRET: ${ssm:/notes-api/jwt-secret}
-  
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource: 
-        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.NOTES_TABLE}"
-        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.USERS_TABLE}"
-        - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DELETED_NOTES_TABLE}"
+ name: aws
+ runtime: nodejs18.x
+ stage: dev
+ region: eu-north-1
+ environment:
+   NOTES_TABLE: ${self:service}-notes-${self:provider.stage}
+   USERS_TABLE: ${self:service}-users-${self:provider.stage}
+   DELETED_NOTES_TABLE: ${self:service}-deleted-notes-${self:provider.stage}
+   JWT_SECRET: ${ssm:/notes-api/jwt-secret}
+ iamRoleStatements:
+   - Effect: Allow
+     Action:
+       - dynamodb:Query
+       - dynamodb:Scan 
+       - dynamodb:GetItem
+       - dynamodb:PutItem
+       - dynamodb:UpdateItem
+       - dynamodb:DeleteItem
+     Resource:
+       - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.NOTES_TABLE}"
+       - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.USERS_TABLE}"
+       - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DELETED_NOTES_TABLE}"
 
 plugins:
-  - serverless-offline
+ - serverless-offline
 
 functions:
-  signup:
-    handler: src/functions/auth/signup.handler
-    events:
-      - http:
-          path: api/user/signup
-          method: post
-          cors: true
-
-  login:
-    handler: src/functions/auth/login.handler
-    events:
-      - http:
-          path: api/user/login
-          method: post
-          cors: true
-
-  getNotes:
-    handler: src/functions/notes/getNotes.handler
-    events:
-      - http:
-          path: api/notes
-          method: get
-          cors: true
-
-  createNote:
-    handler: src/functions/notes/createNote.handler
-    events:
-      - http:
-          path: api/notes
-          method: post
-          cors: true
-
-  updateNote:
-    handler: src/functions/notes/updateNote.handler
-    events:
-      - http:
-          path: api/notes/{id}
-          method: put
-          cors: true
-
-  deleteNote:
-    handler: src/functions/notes/deleteNote.handler
-    events:
-      - http:
-          path: api/notes/{id}
-          method: delete
-          cors: true
-
-  restoreNote:
-    handler: src/functions/notes/restoreNote.handler
-    events:
-      - http:
-          path: api/notes/restore/{id}
-          method: post
-          cors: true
+ signup:
+   handler: src/functions/auth/signup.handler
+   events:
+     - http:
+         path: api/user/signup
+         method: post
+         cors: true
+ login:
+   handler: src/functions/auth/login.handler
+   events:
+     - http:
+         path: api/user/login
+         method: post
+         cors: true
+ getNotes:
+   handler: src/functions/notes/getNotes.handler 
+   events:
+     - http:
+         path: api/notes
+         method: get
+         cors: true
+ createNote:
+   handler: src/functions/notes/createNote.handler
+   events:
+     - http:
+         path: api/notes
+         method: post
+         cors: true
+ updateNote:
+   handler: src/functions/notes/updateNote.handler
+   events:
+     - http:
+         path: api/notes/{id}
+         method: put
+         cors: true
+ deleteNote:
+   handler: src/functions/notes/deleteNote.handler
+   events:
+     - http:
+         path: api/notes/{id}
+         method: delete
+         cors: true
+ restoreNote:
+   handler: src/functions/notes/restoreNote.handler
+   events:
+     - http:
+         path: api/notes/restore/{id}
+         method: post
+         cors: true
 
 resources:
-  Resources:
-    NotesTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:provider.environment.NOTES_TABLE}
-        AttributeDefinitions:
-          - AttributeName: userId
-            AttributeType: S
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: userId
-            KeyType: HASH
-          - AttributeName: id
-            KeyType: RANGE
-        BillingMode: PAY_PER_REQUEST
-
-    UsersTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:provider.environment.USERS_TABLE}
-        AttributeDefinitions:
-          - AttributeName: email
-            AttributeType: S
-        KeySchema:
-          - AttributeName: email
-            KeyType: HASH
-        BillingMode: PAY_PER_REQUEST
-
-    DeletedNotesTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:provider.environment.DELETED_NOTES_TABLE}
-        AttributeDefinitions:
-          - AttributeName: userId
-            AttributeType: S
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: userId
-            KeyType: HASH
-          - AttributeName: id
-            KeyType: RANGE
-        BillingMode: PAY_PER_REQUEST
+ Resources:
+   NotesTable:
+     Type: AWS::DynamoDB::Table
+     Properties:
+       TableName: ${self:provider.environment.NOTES_TABLE}
+       AttributeDefinitions:
+         - AttributeName: userId
+           AttributeType: S
+         - AttributeName: id
+           AttributeType: S
+       KeySchema:
+         - AttributeName: userId
+           KeyType: HASH
+         - AttributeName: id
+           KeyType: RANGE
+       BillingMode: PAY_PER_REQUEST
+   UsersTable:
+     Type: AWS::DynamoDB::Table
+     Properties:
+       TableName: ${self:provider.environment.USERS_TABLE}
+       AttributeDefinitions:
+         - AttributeName: email
+           AttributeType: S
+       KeySchema:
+         - AttributeName: email
+           KeyType: HASH
+       BillingMode: PAY_PER_REQUEST
+   DeletedNotesTable:
+     Type: AWS::DynamoDB::Table
+     Properties:
+       TableName: ${self:provider.environment.DELETED_NOTES_TABLE}
+       AttributeDefinitions:
+         - AttributeName: userId
+           AttributeType: S
+         - AttributeName: id
+           AttributeType: S
+       KeySchema:
+         - AttributeName: userId
+           KeyType: HASH
+         - AttributeName: id
+           KeyType: RANGE
+       BillingMode: PAY_PER_REQUEST
