@@ -9,6 +9,9 @@ const updateNote = async (event) => {
     const { title, text } = event.body;
     const userId = event.user.email;
 
+    console.log('Updating note:', { id, userId, title, text }); 
+
+
     // Validate input
     try {
       await noteSchema.validate({ title, text });
