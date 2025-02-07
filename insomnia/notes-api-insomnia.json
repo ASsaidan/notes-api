@@ -237,7 +237,7 @@
         "created": 1701262696615,
         "name": "Base Environment",
         "data": {
-          "baseUrl": "http://localhost:3000",
+          "baseUrl": "https://hezyeu976b.execute-api.eu-north-1.amazonaws.com/dev",
           "token": "",
           "noteId": ""
         },
